@@ -60,6 +60,7 @@ enum Option<T> {
 // Some(T) and None are still variants of type Option<T>.
 
 // The <T> syntax is a generic type parameter
+// https://doc.rust-lang.org/std/option/enum.Option.html
 
 ////////////////////////////////////////////////////////////////////////////////
 // Using the match control flow
@@ -117,3 +118,29 @@ match dice_roll {
     7 => remove_fancy_hat(),
     _ => reroll(),
 }
+
+
+// The if let syntax lets you combine if and let into a less verbose way to
+// handle values that match one pattern while ignoring the rest.
+
+
+// This:
+let config_max = Some(3u8);
+match config_max {
+    Some(max) => println!("The maximum is configured to be {}", max),
+    _ => (),
+}
+
+// Can be rewritten using if let:
+let config_max = Some(3u8);
+if let Some(max) = config_max {
+    println!("The maximum is configured to be {}", max);
+}
+
+// Using if let, we lose the exhaustive checking that match enforces.
+
+// The syntax if let takes a pattern and an expression separated by 
+// an equal sign. If you have a situation in which your program has
+// logic that is too verbose to express using a match, remember that
+// if let is in your Rust toolbox as well.
+
